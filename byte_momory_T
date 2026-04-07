@@ -1,0 +1,23 @@
+module byte_memory_T(
+    input t,
+    input rst,
+    input clk,
+    output reg Q
+    );
+    
+    wire d_input;
+    assign d_input = t ? -Q: Q;
+    initial begin
+     Q<=0;
+    end
+    
+    always @(posedge(clk) begin
+    if(rst) begin 
+    Q <= 1'b0;
+    end
+    else begin 
+    Q <= d_input;
+    end
+    end
+    
+endmodule
