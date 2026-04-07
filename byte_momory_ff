@@ -1,0 +1,22 @@
+module byte_momory_ff(
+    input clk,  
+    input data,
+    input reset, 
+    output reg Q
+   
+);
+
+    initial begin
+        Q <= 0;
+    end
+    
+    always @(posedge clk) begin
+        if(reset)
+            Q <= 1'b0;
+        else
+           Q <= data;
+    end
+
+    assign NotQ = ~Q; 
+    
+endmodule
