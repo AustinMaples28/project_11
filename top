@@ -1,0 +1,21 @@
+module top(
+    input btnU,
+    input btnC,
+    output [6:0] led
+);
+
+ring_counter_1 rc(
+.clk(btnC),
+.rst(btnU),
+.state(led[2:0])
+);
+
+modulo_counter mc(
+.clk(btnc),
+.rst(btnU),
+.state(led[5:3])
+.out(led[6])
+
+);
+
+endmodule
