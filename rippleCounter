@@ -1,0 +1,29 @@
+module rippleCounter(
+        input btnU, btnC,
+        output stage[2:0]
+    );
+    
+    wire Q;
+    
+    TFlip first (
+        .T(btnU),
+        .Clock(btnC),
+        .Q(stage[0]),
+        .NotQ(Q)
+    );
+    
+    TFlip second (
+        .T(btnU),
+        .Clock(Q),
+        .Q(stage[1]),
+        .NotQ(Q)
+    );
+    
+    TFlip third (
+        .T(btnU),
+        .Clock(Q),
+        .Q(stage[2]),
+        .NotQ(Q)
+    );
+    
+endmodule
