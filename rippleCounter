@@ -1,28 +1,28 @@
 module rippleCounter(
-        input btnU, btnC,
-        output stage[2:0]
+        input clk, rst,
+        output [2:0] state 
     );
     
     wire Q;
     
-    TFlip first (
-        .T(btnU),
+    tff first (
+        .enable(btnU),
         .Clock(btnC),
-        .Q(stage[0]),
+        .Q(state[0]),
         .NotQ(Q)
     );
     
-    TFlip second (
-        .T(btnU),
+    tff second (
+        .enable(btnU),
         .Clock(Q),
-        .Q(stage[1]),
+        .Q(state[1]),
         .NotQ(Q)
     );
     
-    TFlip third (
-        .T(btnU),
+    tff third (
+        .enable(btnU),
         .Clock(Q),
-        .Q(stage[2]),
+        .Q(state[2]),
         .NotQ(Q)
     );
     
