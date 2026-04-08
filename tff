@@ -1,5 +1,5 @@
 module tff (
-    input enable, Clock,
+    input enable, Clock, rst,
     output reg Q,
     output NotQ
 );
@@ -8,8 +8,10 @@ module tff (
         Q <= 0;
     end
 
-    always @(posedge Clock) begin
-        if(enable)
+    always @(posedge Clock or posedge rst) begin
+        if (rst)
+        Q <= 0;
+        else if (enable)
             Q <= ~Q;
         else
             Q <= Q;
