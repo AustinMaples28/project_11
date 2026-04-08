@@ -1,51 +1,51 @@
 module modulo_Counter(
  input clk,
  input rst,
- output {2:0] state,
- output output 
+ output [2:0] state,
+ output out
  );
  
- wire outlogic, at_count, c_reset;
- wire{2:0} next_state;
- wire carry1, carry2, carry3;
+ wire outlogic, at_count;
+ wire [2:0] next_state;
+ wire carry1, carry2, carry3, c_rest;
  
- assign outlogic = at_count^out;
- assign outputassign at_count = (state[2]) & (-state[1]) & (state[0]);
+ assign outlogic = at_count ^ out;
+ assign at_count = (state[2]) & (state[1]) & (~state[0]);
  assign c_rest = at_count | rst;
  
- byte_memory_ff dff_out(
+ dff dff_out(
  .Q(out),
  .clk(clk),
  .rst(rst),
  .data(outlogic)
  );
  
- byte_momory_ff dff_one(
+ dff dff_one(
  .clk(clk),
- .rst(c_reset),
+ .rst(c_rest),
  .data(next_state[0]),
  .Q(state[0])
  );
  
- byte_momory_ff dff_two(
+ dff dff_two(
  .clk(clk),
- .rst(c_reset),
+ .rst(c_rest),
  .data(next_state[1]),
  .Q(state[1])
  );
  
- byte_momory_ff dff_three(
+ dff dff_three(
  .clk(clk),
- .rst(c_reset),
+ .rst(c_rest),
  .data(next_state[2]),
  .Q(state[2])
  );
  
  full_adder mudulo_one (
  .A(state[0]),
- .B(1'b0),
+ .B(1'b1),
  .Y(next_state[0]),
- .Cin(1'b1),
+ .Cin(1'b0),
  .Cout(carry2)
  );
  
@@ -53,15 +53,14 @@ module modulo_Counter(
  .A(state[1]),
  .B(1'b0),
  .Y(next_state[1]),
- .Cin(carry1),
- .Cout(carry2)
+ .Cin(carry2),
+ .Cout(carry3)
  );
  
  full_adder mudulo_three (
  .A(state[2]),
  .B(1'b0),
  .Y(next_state[2]),
- .Cin(carry3),
- .Cout(carry2)
+ .Cin(carry3)
  );
 endmodule
