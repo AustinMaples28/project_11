@@ -6,24 +6,27 @@ module rippleCounter(
     wire Q;
     
     tff first (
-        .enable(btnU),
-        .Clock(btnC),
-        .Q(state[0]),
-        .NotQ(Q)
+        .enable(1'b1),
+        .rst(rst),
+        .Clock(clk),
+        .Q(state[0])
+       // .NotQ(Q)
     );
     
     tff second (
-        .enable(btnU),
-        .Clock(Q),
-        .Q(state[1]),
-        .NotQ(Q)
+        .enable(1'b1),
+        .rst(rst),
+        .Clock(state[0]),
+        .Q(state[1])
+        //.NotQ(Q)
     );
     
     tff third (
-        .enable(btnU),
-        .Clock(Q),
-        .Q(state[2]),
-        .NotQ(Q)
+        .enable(1'b1),
+        .rst(rst),
+        .Clock(state[1]),
+        .Q(state[2])
+        //.NotQ(Q)
     );
     
 endmodule
