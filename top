@@ -4,18 +4,19 @@ module top(
     output [6:0] led
 );
 
-ring_counter_1 rc(
+rippleCounter rc(
 .clk(btnC),
 .rst(btnU),
 .state(led[2:0])
 );
 
-modulo_counter mc(
-.clk(btnc),
+modulo_Counter mc(
+.clk(btnC),
 .rst(btnU),
-.state(led[5:3])
+.state(led[5:3]),
 .out(led[6])
 
 );
 
 endmodule
+
