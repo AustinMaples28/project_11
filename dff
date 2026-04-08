@@ -1,7 +1,7 @@
-module byte_momory_ff(
+module dff(
     input clk,  
     input data,
-    input reset, 
+    input rst, 
     output reg Q
    
 );
@@ -11,12 +11,10 @@ module byte_momory_ff(
     end
     
     always @(posedge clk) begin
-        if(reset)
+        if(rst)
             Q <= 1'b0;
         else
            Q <= data;
     end
-
-    assign NotQ = ~Q; 
-    
+        
 endmodule
