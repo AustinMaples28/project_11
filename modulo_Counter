@@ -9,15 +9,15 @@ module modulo_Counter(
  wire [2:0] next_state;
  wire carry1, carry2, carry3, c_rest;
  
- assign outlogic = at_count ^ out;
- assign at_count = (state[2]) & (state[1]) & (~state[0]);
+// assign outlogic = at_count ^ out;
+ assign at_count = (state[2]) & (~state[1]) & (state[0]);
  assign c_rest = at_count | rst;
  
- dff dff_out(
+ tff dff_out(
  .Q(out),
- .clk(clk),
+ .Clock(clk),
  .rst(rst),
- .data(outlogic)
+ .enable(at_count)
  );
  
  dff dff_one(
