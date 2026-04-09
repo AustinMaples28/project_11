@@ -1,0 +1,27 @@
+# Lab 11 - Counters and Dividers
+
+
+In this lab, we learned how to make clock dividers from two types of counters.
+
+## Rubric
+
+| Item | Description | Value |
+| ---- | ----------- | ----- |
+| Summary Answers | Your writings about what you learned in this lab. | 25% |
+| Question 1 | Your answers to the question | 25% |
+| Question 2 | Your answers to the question | 25% |
+| Question 3 | Your answers to the question | 25% |
+
+## Names
+Austin Maples
+Jonibek Utaev
+## Summary
+In this lab, we built two types of clock dividers using flip-flops: a modulo counter and a ripple counter. The modulo counter used D-flip-flops and a full adder to count to a set value, toggle an output, and reset, while the ripple counter chained T-flip-flops together where each stage divided the clock frequency by 2. We tested both designs on the Basys 3 board using a button as a manual clock input and LEDs to observe the outputs of each counter stage.
+## Lab Questions
+
+### 1 - Why does the Modulo Counter actually divide clocks by 2 * Count?
+The modulo counter toggles its output each time it reaches the target count value, rather than simply resetting a pulse. Because a single full period of a waveform (one "Hz") requires a complete high→low→high transition, the output must toggle twice per period
+### 2 - Why does the ring counter's output go to all 1s on the first clock cycle?
+On reset, all flip-flops in the ripple counter are initialized to 0, and on the very first clock edge each T-flip-flop sees its first triggering edge and toggles from 0 to 1. Because all stages start at 0 and each one triggers on the rising edge of the previous stage, the first clock pulse ripples through and drives all outputs high simultaneously. After that first cycle the stages fall into their normal counting pattern as subsequent edges cause them to toggle at different times.
+### 3 - What width of ring counter would you use to get to an output of ~1KHz?
+A 17-stage ripple counter divides the 100 MHz clock by 131,072, producing an output of approximately 763 Hz, which is the closest achievable frequency to 1 kHz.
